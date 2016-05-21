@@ -1,8 +1,13 @@
 package rocket.app.view;
 
+import java.awt.TextField;
+
+import com.sun.xml.ws.org.objectweb.asm.Label;
+
 import eNums.eAction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import rocket.app.MainApp;
 import rocketCode.Action;
 import rocketData.LoanRequest;
@@ -22,7 +27,18 @@ public class MortgageController {
 	//		Labels   -  various labels for the controls
 	//		Button   -  button to calculate the loan payment
 	//		Label    -  to show error messages (exception throw, payment exception)
-
+	
+	private TextField txtIncome;
+	private TextField txtExpenses;
+	private TextField txtCreditScore;
+	private TextField txtHouseCost;
+	private ComboBox cmbTerm;
+	private Label Income;
+	private Label Expenses;
+	private Label CreditScore;
+	private Label HouseCost;
+	private Label lblMortgagePayment;
+	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
