@@ -34,7 +34,6 @@ public class RocketHub extends Hub {
 			//	Determine if payment, call RateBLL.getPayment
 			//	
 			//	you should update lq, and then send lq back to the caller(s)
-			
 			try {
 				lq.setdRate(RateBLL.getRate(lq.getiCreditScore()));
 			}

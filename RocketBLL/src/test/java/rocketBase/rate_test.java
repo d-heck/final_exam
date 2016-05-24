@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import exceptions.RateException;
+
 public class rate_test {
 
 	//TODO - RocketBLL rate_test
@@ -14,7 +16,22 @@ public class rate_test {
 	//		credit score
 	@Test
 	public void test() {
-		assert(1==1);
+		try {
+			assertTrue(RateBLL.getRate(600) == 5);
+		} catch (RateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void test1() {
+		try {
+			RateBLL.getRate(-30000);
+		} catch (RateException e) {
+			// TODO Auto-generated catch block
+			assertTrue(1==1);
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,10 +1,13 @@
 package rocket.app.view;
 
+import java.awt.Button;
 import java.awt.TextField;
 
 import com.sun.xml.ws.org.objectweb.asm.Label;
 
 import eNums.eAction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -28,16 +31,20 @@ public class MortgageController {
 	//		Button   -  button to calculate the loan payment
 	//		Label    -  to show error messages (exception throw, payment exception)
 	
+	@FXML
 	private TextField txtIncome;
+	@FXML
 	private TextField txtExpenses;
+	@FXML
 	private TextField txtCreditScore;
+	@FXML
 	private TextField txtHouseCost;
+	@FXML
 	private ComboBox cmbTerm;
-	private Label Income;
-	private Label Expenses;
-	private Label CreditScore;
-	private Label HouseCost;
+	@FXML
 	private Label lblMortgagePayment;
+	@FXML
+	private Button btnPayment;
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -57,12 +64,22 @@ public class MortgageController {
 		//	TODO - RocketClient.RocketMainController
 		//			set the loan request details...  rate, term, amount, credit score, downpayment
 		//			I've created you an instance of lq...  execute the setters in lq
+		lq.setdAmount(Double.parseDouble(txtHouseCost.getText()));
+		lq.setiCreditScore((int)Double.parseDouble(txtCreditScore.getText()));
+		
+		if(cmbTerm.getValue() == "30") {
+			lq.setiTerm(30*12);
+		}
+		else if (cmbTerm.getValue()=="15") {
+				lq.setiTerm(15*12);
+			}
 
 		a.setLoanRequest(lq);
 		
 		//	send lq as a message to RocketHub		
 		mainApp.messageSend(lq);
-	}
+		}
+		
 	
 	public void HandleLoanRequestDetails(LoanRequest lRequest)
 	{
@@ -72,5 +89,10 @@ public class MortgageController {
 		//			should be calculated.
 		//			Display dPayment on the form, rounded to two decimal places
 		
+	}
+	@FXML
+	private void combo() {
+		ObservableList<String> options = FXCollections.observableArrayList("30", "15");
+		cmbTerm.setItems(options);
 	}
 }
